@@ -2,8 +2,9 @@ package interfci;
 
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class Interfaci {
     public static void main(String[] args) {
@@ -22,7 +23,21 @@ public class Interfaci {
         jbutton.setFont(new Font("Arial", Font.ITALIC, 40)); // modifica a fonte o estio e o tamanho da mensagem dentrp dp botão
         jbutton.setForeground(new Color(50, 50, 100)); // modifca a cor da letra
         jbutton.setBackground(new Color(100, 20, 30)); // modifica a cor de fundo do botão
+        jbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Mensagem que será exibida ao clicar no botão
+                JOptionPane.showMessageDialog(null, "Você clicou no botão!", " titulo da mensagem",
+                JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
         jFrame.add(jbutton);
+
+        JTextField jtexfild = new JTextField(" digite aqui");
+        jtexfild.setBounds(50, 100, 110, 90);
+        jtexfild.setVisible(true);
+        jFrame.add(jtexfild);
+
     }
     
 }
