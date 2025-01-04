@@ -19,8 +19,8 @@ public class Interfaci {
 
         JButton jbutton = new JButton(" clique aqui"); // mensagem do botão
         jbutton.setText("Botão"); // modificar mensagem
-        jbutton.setBounds(100, 200, 200, 90); // modifica o canto que o botão estara
-        jbutton.setFont(new Font("Arial", Font.ITALIC, 40)); // modifica a fonte o estio e o tamanho da mensagem dentrp dp botão
+        jbutton.setBounds(200, 200, 100, 30); // modifica o canto que o botão estara
+        jbutton.setFont(new Font("Arial", Font.ITALIC, 10)); // modifica a fonte o estio e o tamanho da mensagem dentrp dp botão
         jbutton.setForeground(new Color(50, 50, 100)); // modifca a cor da letra
         jbutton.setBackground(new Color(100, 20, 30)); // modifica a cor de fundo do botão
         jbutton.addActionListener(new ActionListener() {
@@ -34,10 +34,14 @@ public class Interfaci {
         jFrame.add(jbutton);
 
         JTextField jtexfild = new JTextField(" digite aqui");
-        jtexfild.setBounds(50, 100, 110, 90);
-        jtexfild.setVisible(true);
+        jtexfild.setBounds(170, 100, 150, 50);
+        jtexfild.setFont(new Font( "arial", Font.CENTER_BASELINE, 10));
+        jtexfild.setText("digite");
+        jtexfild.setBackground(new Color(0, 0, 0));
+        jtexfild.setForeground(new Color(255, 255, 255));
         jFrame.add(jtexfild);
-
+        jtexfild.requestFocus();
+        jtexfild.setVisible(true);
     }
     
 }
