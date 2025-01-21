@@ -55,8 +55,8 @@ public class ConectFor implements TuiLig4 {
         desenharTab();
     }
     public char verificarVitoria(){
+        // verificação horizontal
         for (int j = 0; j < tab.length; j++) {
-
             for (int i = 0; i < 4; i++) {
                 if (tab[j][i] == ' ') {
                     continue;
@@ -64,6 +64,31 @@ public class ConectFor implements TuiLig4 {
                 if (tab[j][i] == tab[j][i + 1] && tab[j][i] == tab[j][i + 2]
                         && tab[j][i] == tab[j][i + 3]) {
                     return tab[j][i];
+                }
+            }
+        }
+        // verificação verticl
+        for (int c = 0; c < tab[0].length; c++) {
+            for (int l = 0; l < 3; l++) {
+                if (tab[l][c] == ' ') {
+                    continue;
+                }
+                if (tab[l][c] == tab[l+1][c] && tab[l][c] == tab[l+2][c]
+                        && tab[l][c] == tab[l+3][c]) {
+
+                    return tab[l][c];
+                }
+            }
+        }
+        for (int c = 0; c < tab[0].length; c++) {
+            for (int l = 0; l < 3; l++) {
+                if (tab[l][c] == ' ') {
+                    continue;
+                }
+                if (tab[l][c] == tab[l+1][c] && tab[l][c] == tab[l+2][c]
+                        && tab[l][c] == tab[l+3][c]) {
+
+                    return tab[l][c];
                 }
             }
         }
