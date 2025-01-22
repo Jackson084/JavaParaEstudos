@@ -32,7 +32,9 @@ public class ConectFor implements TuiLig4 {
     @Override
     public void desenharTab() {
 
+        System.out.println("  1 2 3 4 5 6 7");
         for (int i = 0; i < tab.length; i++) {
+            System.out.print((i+1) + " ");
             for (int j = 0; j < tab[0].length; j++) {
                 System.out.print(tab[i][j]);
                 if(j<6){
@@ -41,7 +43,7 @@ public class ConectFor implements TuiLig4 {
 
             }
             if(i<5) {
-                System.out.println("\n-------------");
+                System.out.println("\n  -------------");
             }
         }
         System.out.println();
@@ -80,15 +82,54 @@ public class ConectFor implements TuiLig4 {
                 }
             }
         }
-        for (int c = 0; c < tab[0].length; c++) {
-            for (int l = 0; l < 3; l++) {
-                if (tab[l][c] == ' ') {
+        // verificar diagonal
+        for (int i = 0; i < 6; i++) {
+            for(int j=0; j<3; j++){
+                int coluna= i<3? 0 : i-2;
+                int linha= i>2? 0 : 2-i;
+
+                int colunaAtual, linhaAtual;
+
+                colunaAtual= coluna+j;
+                linhaAtual= linha+j;
+
+                if(linhaAtual+3>=6 || colunaAtual+3>=7){
+                    break;
+                }
+                if (tab[linhaAtual][colunaAtual] == ' ') {
                     continue;
                 }
-                if (tab[l][c] == tab[l+1][c] && tab[l][c] == tab[l+2][c]
-                        && tab[l][c] == tab[l+3][c]) {
+                if (tab[linhaAtual][colunaAtual] == tab[linhaAtual+1][colunaAtual+1]
+                    && tab[linhaAtual][colunaAtual] == tab[linhaAtual+2][colunaAtual+2]
+                    && tab[linhaAtual][colunaAtual] == tab[linhaAtual+3][colunaAtual+3]) {
 
-                    return tab[l][c];
+                    return tab[linhaAtual][colunaAtual];
+                }
+
+            }
+        }
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                int coluna = i < 3 ? 0 : i - 2;
+                int linha = i >= 2 ? 5 : 3 + i;
+
+                int colunaAtual, linhaAtual;
+
+                colunaAtual = coluna + j;
+                linhaAtual = linha - j;
+                
+
+                if (linhaAtual - 3 < 0 || colunaAtual + 3 >= 7) {
+                    break;
+                }
+                if (tab[linhaAtual][colunaAtual] == ' ') {
+                    continue;
+                }
+                if (tab[linhaAtual][colunaAtual] == tab[linhaAtual - 1][colunaAtual + 1]
+                        && tab[linhaAtual][colunaAtual] == tab[linhaAtual - 2][colunaAtual + 2]
+                        && tab[linhaAtual][colunaAtual] == tab[linhaAtual - 3][colunaAtual + 3]) {
+
+                    return tab[linhaAtual][colunaAtual];
                 }
             }
         }
@@ -96,6 +137,7 @@ public class ConectFor implements TuiLig4 {
         return '*';
     }
 
-
-    
+    public char getVez() {
+        return vez;
+    }
 }
