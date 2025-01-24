@@ -7,6 +7,9 @@ public class ConectFor implements TuiLig4 {
     private final char O ='o';
 
     public ConectFor(){
+        for (int index = 0; index < 5; index++) {
+            System.out.println();
+        }
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab[0].length ; j++) {
                 tab[i][j] = ' ';
@@ -17,13 +20,17 @@ public class ConectFor implements TuiLig4 {
     public boolean jogar(int linha, int coluna){
         if(linha > 5 || linha < 0 || coluna > 6 || coluna < 0 ){
             return false;
-        }
+        } // se qualquer uma dessas condiçãoes forem atendidas retorna falso
         if(tab[linha][coluna]!=vez){
             tab[linha][coluna]=vez;
-            vez = vez==X? O : X;
-            return true;
+            if(vez == X){
+                vez=O;
+            }else{
+                vez=X;
+            }//troca os jogadores 
+            return true; // retorna verdadeiro por tudo estar certo
         }else{
-            return false;
+            return false; // retorna falso em ultimo caso
         }
 
     }
@@ -31,7 +38,6 @@ public class ConectFor implements TuiLig4 {
 
     @Override
     public void desenharTab() {
-
         System.out.println("  1 2 3 4 5 6 7");
         for (int i = 0; i < tab.length; i++) {
             System.out.print((i+1) + " ");
@@ -40,7 +46,6 @@ public class ConectFor implements TuiLig4 {
                 if(j<6){
                     System.out.print("|");
                 }
-
             }
             if(i<5) {
                 System.out.println("\n  -------------");
@@ -52,21 +57,20 @@ public class ConectFor implements TuiLig4 {
     public char[][] getTab() {
         return tab;
     }
-
-    void mostrartab() {
+    public void mostrartab() {
         desenharTab();
     }
     public char verificarVitoria(){
         // verificação horizontal
         for (int j = 0; j < tab.length; j++) {
             for (int i = 0; i < 4; i++) {
-                if (tab[j][i] == ' ') {
+                if (tab[j][i] == ' ') {// se o tabuleiro for vazio na linha e na coluna ele continua para a proxima posição
                     continue;
                 }
-                if (tab[j][i] == tab[j][i + 1] && tab[j][i] == tab[j][i + 2]
-                        && tab[j][i] == tab[j][i + 3]) {
-                    return tab[j][i];
-                }
+                if (tab[j][i] == tab[j][i + 1] && tab[j][i] == tab[j][i + 2] //se tabuleiro i e j for igual a o tabuleiro j e i+1 E
+                        && tab[j][i] == tab[j][i + 3]) { // for igual a o tabuleiro j e i+2 e igual o tabuleiro j e i+3
+                    return tab[j][i]; // retorna o ganhador se a condição for atendida
+                } //em outras palavras se a colunas atual for igaul as 3 proximas colunas, ele retorna o vencedor do horizontal
             }
         }
         // verificação verticl
@@ -79,14 +83,23 @@ public class ConectFor implements TuiLig4 {
                         && tab[l][c] == tab[l+3][c]) {
 
                     return tab[l][c];
-                }
-            }
+                } // aqui é a mesma coisa
+            }// se o tabuleiro na linha atual for igual as 3 proximas linhas 
         }
         // verificar diagonal
-        for (int i = 0; i < 6; i++) {
-            for(int j=0; j<3; j++){
-                int coluna= i<3? 0 : i-2;
-                int linha= i>2? 0 : 2-i;
+        for (int i = 0; i < 6; i++) { // existe 6 chances de vitoria
+            for(int j=0; j<3; j++){  // aqui o j amnda 3 vezes sempre que o i sobe um
+                int coluna, linha; 
+                if(i<3){
+                    coluna=0;
+                }else{
+                    coluna=i-2;
+                }
+                if(i>2){
+                    linha=0;
+                }else{
+                    linha=2-i;
+                }
 
                 int colunaAtual, linhaAtual;
 
@@ -95,7 +108,7 @@ public class ConectFor implements TuiLig4 {
 
                 if(linhaAtual+3>=6 || colunaAtual+3>=7){
                     break;
-                }
+                }// para garantir que não saira das bordas
                 if (tab[linhaAtual][colunaAtual] == ' ') {
                     continue;
                 }
@@ -104,14 +117,24 @@ public class ConectFor implements TuiLig4 {
                     && tab[linhaAtual][colunaAtual] == tab[linhaAtual+3][colunaAtual+3]) {
 
                     return tab[linhaAtual][colunaAtual];
-                }
+                }// se a linha e a coluna atual for igual as 3 proximas colunas diagonais a esquerda (\) ele retorna o ganhador da diagonal a esquerda
 
             }
         }
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 3; j++) {
-                int coluna = i < 3 ? 0 : i - 2;
-                int linha = i >= 2 ? 5 : 3 + i;
+                int linha, coluna;
+                if(i<3){
+                    coluna=0;
+                }else{
+                    coluna=i-2;
+                }
+                if(i>=2){
+                    linha=5;
+                }else{
+                    linha=3+i;
+                }// mesama coisa aqui com uma pequena diferença
+           
 
                 int colunaAtual, linhaAtual;
 
@@ -121,7 +144,7 @@ public class ConectFor implements TuiLig4 {
 
                 if (linhaAtual - 3 < 0 || colunaAtual + 3 >= 7) {
                     break;
-                }
+                }// pra não sair das bordas
                 if (tab[linhaAtual][colunaAtual] == ' ') {
                     continue;
                 }
@@ -130,7 +153,7 @@ public class ConectFor implements TuiLig4 {
                         && tab[linhaAtual][colunaAtual] == tab[linhaAtual - 3][colunaAtual + 3]) {
 
                     return tab[linhaAtual][colunaAtual];
-                }
+                }// agora aqui verifica as colunas a direita (/) retorna seu ganhador
             }
         }
 
@@ -139,5 +162,15 @@ public class ConectFor implements TuiLig4 {
 
     public char getVez() {
         return vez;
+    }
+    public void setVez(char troca){
+        if(troca=='x'){
+            vez=X;
+        }else if(troca=='o'){
+            vez=O;
+        }else{
+            vez=X;
+        }
+        
     }
 }
