@@ -7,7 +7,7 @@ public class ConectFor implements TuiLig4 {
     private final char O ='o';
 
     public ConectFor(){
-        for (int index = 0; index < 5; index++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println();
         }
         for (int i = 0; i < tab.length; i++) {
@@ -20,17 +20,17 @@ public class ConectFor implements TuiLig4 {
     public boolean jogar(int linha, int coluna){
         if(linha > 5 || linha < 0 || coluna > 6 || coluna < 0 ){
             return false;
-        } // se qualquer uma dessas condiçãoes forem atendidas retorna falso
+        } 
         if(tab[linha][coluna]!=vez){
             tab[linha][coluna]=vez;
             if(vez == X){
                 vez=O;
             }else{
                 vez=X;
-            }//troca os jogadores 
-            return true; // retorna verdadeiro por tudo estar certo
+            } 
+            return true; 
         }else{
-            return false; // retorna falso em ultimo caso
+            return false; 
         }
 
     }
@@ -38,9 +38,9 @@ public class ConectFor implements TuiLig4 {
 
     @Override
     public void desenharTab() {
-        System.out.println("  1 2 3 4 5 6 7");
+        System.out.println("  0 1 2 3 4 5 6");
         for (int i = 0; i < tab.length; i++) {
-            System.out.print((i+1) + " ");
+            System.out.print(i + " ");
             for (int j = 0; j < tab[0].length; j++) {
                 System.out.print(tab[i][j]);
                 if(j<6){
@@ -89,8 +89,10 @@ public class ConectFor implements TuiLig4 {
         // verificar diagonal
         for (int i = 0; i < 6; i++) { // existe 6 chances de vitoria
             for(int j=0; j<3; j++){  // aqui o j amnda 3 vezes sempre que o i sobe um
-                int coluna, linha; 
-                if(i<3){
+                int coluna= i<3? 0 : i-2;
+                int linha= i>2? 0 : 2-i; 
+                //region eu sei que isso significa isso
+                /*if(i<3){
                     coluna=0;
                 }else{
                     coluna=i-2;
@@ -99,7 +101,8 @@ public class ConectFor implements TuiLig4 {
                     linha=0;
                 }else{
                     linha=2-i;
-                }
+                }*/
+                //endregion apenas usei pq tava querendo aprender a usar operador auternario, fica menos poluido
 
                 int colunaAtual, linhaAtual;
 
@@ -123,8 +126,10 @@ public class ConectFor implements TuiLig4 {
         }
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 3; j++) {
-                int linha, coluna;
-                if(i<3){
+                int linha = i<3? 0 : i-2;
+                int coluna = i>=2? 0 : i-2;
+                //region mesma coisa aqui
+                /*if(i<3){
                     coluna=0;
                 }else{
                     coluna=i-2;
@@ -133,7 +138,8 @@ public class ConectFor implements TuiLig4 {
                     linha=5;
                 }else{
                     linha=3+i;
-                }// mesama coisa aqui com uma pequena diferença
+                }// mesama coisa aqui com uma pequena diferença*/
+                //endregion
            
 
                 int colunaAtual, linhaAtual;
@@ -163,10 +169,10 @@ public class ConectFor implements TuiLig4 {
     public char getVez() {
         return vez;
     }
-    public void setVez(char troca){
-        if(troca=='x'){
+    public void setVez(int troca){
+        if(troca==1){
             vez=X;
-        }else if(troca=='o'){
+        }else if(troca==2){
             vez=O;
         }else{
             vez=X;
